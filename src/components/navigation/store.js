@@ -1,22 +1,22 @@
 const state = {
-  test: 'Hello this is a test'
+  sideBar: false
 }
 
 const getters = {
-  getTest (state) {
-    return state.test
+  getSidebarStatus (state) {
+    return state.sideBar
   }
 }
 
 const actions = {
-  updateTestAction ({ commit }, data) {
-    commit('updateTestMutation', data)
+  updateSidebarStatusAction ({ commit }, data) {
+    commit('updateSidebarStatusMutation', data)
   }
 }
 
 const mutations = {
-  updateTestMutation (state, payload) {
-    state.test = payload
+  updateSidebarStatusMutation (state) {
+    state.sideBar = !state.sideBar
   }
 }
 

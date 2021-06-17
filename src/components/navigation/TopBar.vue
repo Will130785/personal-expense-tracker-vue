@@ -2,6 +2,7 @@
   <nav class="topbar">
     <!-- For VUEX testing purposes -->
     <!-- <button @click="testMethod">Click me</button> -->
+    <button class="sidebar-toggle" @click="toggleSidebar">Open</button>
   </nav>    
 </template>
 
@@ -9,16 +10,12 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['getTest'])
-  },
-  mounted () {
-    console.log(this.getTest)
+    ...mapGetters(['getSidebarStatus'])
   },
   methods: {
-    ...mapActions(['updateTestAction']),
-    testMethod () {
-      this.updateTestAction('Updated Test')
-      console.log(this.getTest)
+    ...mapActions(['updateSidebarStatusAction']),
+    toggleSidebar () {
+      this.updateSidebarStatusAction()
     }
   }
 }
@@ -28,6 +25,12 @@ export default {
 .topbar {
   width: 100%;
   height: 5rem;
-  background-color: #000;
+  background-color: #f5f5f5;
+}
+
+@media only screen and (min-width: 992px) {
+  .sidebar-toggle {
+    display: none;
+  }
 }
 </style>

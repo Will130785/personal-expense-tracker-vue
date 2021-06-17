@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="getAuth" class="sidebar">
+  <nav v-if="getAuth" class="sidebar" :class="{'sidebar-open': getSidebarStatus}">
     <ul class="sidebar-links">
       <li class="sidebar-link" v-for="(link, index) in navLinks" :key="index">
         <router-link :to="{ name: link.name }">{{ link.link }}</router-link>
@@ -12,7 +12,7 @@
 import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['getAuth'])
+    ...mapGetters(['getAuth', 'getSidebarStatus'])
   },
   data () {
     return {
@@ -30,12 +30,37 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  width: 20%;
+  position: fixed;
+  left: -30%;
   height: 100%;
-  background-color: #000;
+  background-color: #f5f5f5;
+  transition: all .3s;
+}
+
+.sidebar-open {
+  left: 0;
+  width: 30%;
+}
+
+.sidebar-links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
 }
 
 .sidebar-link a {
-  color: #fff;
+  color: #000;
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+@media only screen and (min-width: 992px) {
+  .sidebar {
+    position: relative;
+    width: 20%;
+    left: 0;
+  }
 }
 </style>

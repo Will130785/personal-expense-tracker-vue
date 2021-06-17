@@ -32,7 +32,8 @@ export default {
 }
 
 .login-card {
-  width: 50%;
+  width: 100%;
+  padding: 1rem;
 }
 
 .form-group {
@@ -47,5 +48,21 @@ export default {
   border: none;
   background-color: #f5f5f5;
   font-size: 1.8rem;
+  border: 3px solid #fff;
+}
+
+.app-form-control:focus {
+  border: 3px solid #0058a3;
+  outline: none;
+}
+
+.app-form-control::placeholder {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+@media only screen and (min-width: 992px) {
+  .login-card {
+    width: 50%;
+  }
 }
 </style>
