@@ -1,23 +1,48 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
+import Login from '../views/auth/Login.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Profile from '../views/Profile.vue'
+import Groceries from '../views/Groceries.vue'
+import HomeShopping from '../views/HomeShopping.vue'
+import Social from '../views/Social.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '/login',
     name: 'Login',
     component: Login
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {
+    path: '/groceries',
+    name: 'Groceries',
+    component: Groceries
+  },
+  {
+    path: '/home-shopping',
+    name: 'HomeShopping',
+    component: HomeShopping
+  },
+  {
+    path: '/social',
+    name: 'Social',
+    component: Social
   }
 ]
 

@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import TopBar from './components/TopBar'
-import SideBar from './components/SideBar'
+import TopBar from './components/navigation/TopBar'
+import SideBar from './components/navigation/SideBar'
 export default {
   components: {
     TopBar,
