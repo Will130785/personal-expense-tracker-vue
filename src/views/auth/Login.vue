@@ -10,14 +10,35 @@
         <input class="app-form-control" type="password" placeholder="Enter Password" />
       </div>
     </div>
+    <div>{{ getAuthTest }}</div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+// import { login } from '../../services/auth'
 export default {
   computed: {
-    ...mapGetters(['getAuth'])
+    ...mapGetters(['getAuth', 'getAuthTest'])
+  },
+  data () {
+    return {
+      test: ''
+    }
+  },
+  mounted () {
+    // login()
+    // .then(res => {
+    //   console.log(res)
+    // })
+    this.authTest()
+    console.log(this.getAuthTest)
+  },
+  methods: {
+    ...mapActions(['authTestAction']),
+    async authTest () {
+      await this.authTestAction()
+    }
   }
 }
 </script>
