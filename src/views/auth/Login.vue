@@ -2,28 +2,46 @@
   <div class="login">
     <div class="login-card">
       <!-- Username -->
-      <div class="form-group">
-        <input class="app-form-control" type="text" placeholder="Enter Username" />
-      </div>
+      <Input
+        v-model="user.username"
+        inputType="text"
+        placeholder="Enter Username"
+      />
       <!-- Password -->
+      <Input
+        v-model="user.password"
+        inputType="password"
+        placeholder="Enter Password"
+      />
+      <!-- Login Btn -->
       <div class="form-group">
-        <input class="app-form-control" type="password" placeholder="Enter Password" />
+        <button @click="handleLogin" class="login-btn">Login</button>
       </div>
     </div>
-    <div>{{ getAuthTest }}</div>
+    <!-- For testing purposes -->
+    <!-- <div>{{ getUser }}</div> -->
+    <div>{{ user }}</div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Input from '../../components/forms/Input'
 // import { login } from '../../services/auth'
 export default {
+  components: {
+    Input
+  },
   computed: {
-    ...mapGetters(['getAuth', 'getAuthTest'])
+    ...mapGetters(['getAuth', 'getUser'])
   },
   data () {
     return {
-      test: ''
+      test: '',
+      user: {
+        username: '',
+        password: ''
+      }
     }
   },
   mounted () {
@@ -31,13 +49,18 @@ export default {
     // .then(res => {
     //   console.log(res)
     // })
-    this.authTest()
-    console.log(this.getAuthTest)
+    // this.authTest()
+    // console.log(this.getAuthTest)
   },
   methods: {
-    ...mapActions(['authTestAction']),
-    async authTest () {
-      await this.authTestAction()
+    ...mapActions(['loginAction']),
+    // async authTest () {
+    //   await this.authTestAction()
+    // },
+    async handleLogin () {
+      console.log('You want to login')
+      // Collect login data and send request
+      await this.loginAction(this.user)
     }
   }
 }
@@ -79,6 +102,17 @@ export default {
 
 .app-form-control::placeholder {
   font-family: 'Hind Siliguri', sans-serif;
+}
+
+.login-btn {
+  width: 100%;
+  border: 3px solid #fff;
+  padding: 1rem;
+  border-radius: 3rem;
+  font-size: 1.8rem;
+  color: #fff;
+  background-color: #fbdd01;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 992px) {

@@ -2,30 +2,35 @@ import { login } from '../../services/auth'
 
 const state = {
   user: {},
-  token: true,
+  token: '',
   response: ''
 }
 const getters = {
   getAuth (state) {
     return state.token
   },
-  getAuthTest (state) {
-    return state.response
+  // getAuthTest (state) {
+  //   return state.response
+  // }
+  getUser (state) {
+    return state.user
   }
 }
 const actions = {
-  async authTestAction ({ commit }) {
-    const res = await login()
+  async loginAction ({ commit }, userData) {
+    const res = await login(userData)
     if (res) {
-      commit('authTestMutation', 'HEllo')
+      console.log('*****', res)
+      commit('loginMutation', res.data)
     } else {
       return
     }
   }
 }
 const mutations = {
-  authTestMutation (state, payload) {
-    state.response = payload
+  loginMutation (state, payload) {
+    state.user = payload.user
+    state.token = payload.token
   }
 }
 

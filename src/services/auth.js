@@ -1,8 +1,8 @@
 import { apiClient } from './api'
 
-const login = async () => {
+const login = async (data) => {
   try {
-    const result = await apiClient().get('/login')
+    const result = await apiClient().post('/login', data)
     if (result && result.data) {
       return result
     }
