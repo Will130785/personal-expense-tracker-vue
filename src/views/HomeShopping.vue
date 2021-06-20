@@ -1,6 +1,6 @@
 <template>
-  <div>
-    This will be the home shopping page
+  <div class="home-shopping">
+    
   </div>
 </template>
 
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.home-shopping {
+  width: 100%;
+}
 </style>

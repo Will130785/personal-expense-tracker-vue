@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="getAuth" class="sidebar" :class="{'sidebar-open': getSidebarStatus}">
+  <nav v-if="isLoggedIn" class="sidebar" :class="{'sidebar-open': getSidebarStatus}">
     <ul class="sidebar-links">
       <li class="sidebar-link" v-for="(link, index) in navLinks" :key="index">
         <router-link :to="{ name: link.name }">{{ link.link }}</router-link>
@@ -12,7 +12,7 @@
 import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['getAuth', 'getSidebarStatus'])
+    ...mapGetters(['getAuth', 'getSidebarStatus', 'isLoggedIn'])
   },
   data () {
     return {

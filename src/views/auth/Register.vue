@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <div class="login-card">
+  <div class="register">
+    <div class="register-card">
       <!-- Username -->
       <Input
         v-model="user.username"
@@ -13,9 +13,15 @@
         inputType="password"
         placeholder="Enter Password"
       />
+      <!-- Confirm Password -->
+      <Input
+        v-model="user.passwordConfirm"
+        inputType="password"
+        placeholder="Confirm Password"
+      />
       <!-- Login Btn -->
       <div class="form-group">
-        <button @click="handleLogin" class="login-btn">Login</button>
+        <button @click="handleRegister" class="login-btn">Login</button>
       </div>
     </div>
     <!-- For testing purposes -->
@@ -25,7 +31,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Input from '../../components/forms/Input'
 // import { login } from '../../services/auth'
 export default {
@@ -33,14 +39,15 @@ export default {
     Input
   },
   computed: {
-    // ...mapGetters(['getAuth', 'getUser'])
+    ...mapGetters(['getAuth', 'getUser'])
   },
   data () {
     return {
       test: '',
       user: {
         username: '',
-        password: ''
+        password: '',
+        passwordConfirm: ''
       }
     }
   },
@@ -53,23 +60,26 @@ export default {
     // console.log(this.getAuthTest)
   },
   methods: {
-    ...mapActions(['loginAction']),
+    ...mapActions(['registerAction']),
     // async authTest () {
     //   await this.authTestAction()
     // },
-    async handleLogin () {
-      console.log('You want to login')
+    async handleRegister () {
+      console.log('You want to register user')
       // Collect login data and send request
-      console.log(this.user)
-      const res = await this.loginAction(this.user)
-      console.log(await res)
+      const res = await this.registerAction(this.user)
+      if (await res) {
+        console.log('success')
+      } else {
+        console.log('error')
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.login {
+.register {
   height: 100%;
   width: 100%;
   display: flex;
@@ -77,7 +87,7 @@ export default {
   align-items: center;
 }
 
-.login-card {
+.register-card {
   width: 100%;
   padding: 1rem;
 }
@@ -118,7 +128,7 @@ export default {
 }
 
 @media only screen and (min-width: 992px) {
-  .login-card {
+  .register-card {
     width: 50%;
   }
 }

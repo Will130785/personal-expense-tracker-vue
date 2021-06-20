@@ -1,6 +1,6 @@
 <template>
-  <div>
-    This will be the social expense page
+  <div class="social">
+    
   </div>
 </template>
 
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.social {
+  width: 100%;
+}
 </style>

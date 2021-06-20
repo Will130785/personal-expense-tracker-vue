@@ -1,6 +1,6 @@
 <template>
-  <div>
-    This will be the Dashboard page
+  <div class="dashboard">
+    
   </div>
 </template>
 
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.dashboard {
+  width: 100%;
+}
 </style>

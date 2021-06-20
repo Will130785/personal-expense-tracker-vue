@@ -3,6 +3,8 @@
     <!-- For VUEX testing purposes -->
     <!-- <button @click="testMethod">Click me</button> -->
     <button v-show="isLoggedIn" class="sidebar-toggle" @click="toggleSidebar">Open</button>
+    <button v-if="isLoggedIn" @click="handleLogout">Logout</button>
+    <router-link v-if="isLoggedIn" :to="{ name: 'Register' }">Register</router-link>
   </nav>    
 </template>
 
@@ -10,17 +12,20 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(['getSidebarStatus'])
+    ...mapGetters(['getSidebarStatus', 'isLoggedIn'])
   },
   data () {
     return {
-      isLoggedIn: false
+      
     }
   },
   methods: {
-    ...mapActions(['updateSidebarStatusAction']),
+    ...mapActions(['updateSidebarStatusAction', 'logout']),
     toggleSidebar () {
       this.updateSidebarStatusAction()
+    },
+    handleLogout () {
+      this.logout()
     }
   }
 }
@@ -33,9 +38,9 @@ export default {
   background-color: #f5f5f5;
 }
 
-// @media only screen and (min-width: 992px) {
-//   .sidebar-toggle {
-//     display: none;
-//   }
-// }
+@media only screen and (min-width: 992px) {
+  .sidebar-toggle {
+    display: none;
+  }
+}
 </style>

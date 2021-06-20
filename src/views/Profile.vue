@@ -1,6 +1,6 @@
 <template>
-  <div>
-    This will be the profile page
+  <div class="profile">
+    
   </div>
 </template>
 
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.profile {
+  width: 100%;
+}
 </style>
