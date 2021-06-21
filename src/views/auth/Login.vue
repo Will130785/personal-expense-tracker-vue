@@ -21,16 +21,19 @@
     <!-- For testing purposes -->
     <!-- <div>{{ getUser }}</div> -->
     <!-- <div>{{ user }}</div> -->
+    <Flash />
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import Input from '../../components/forms/Input'
+import Flash from '../../components/flash-messages/Flash'
 // import { login } from '../../services/auth'
 export default {
   components: {
-    Input
+    Input,
+    Flash
   },
   computed: {
     // ...mapGetters(['getAuth', 'getUser'])
