@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import 'nprogress/nprogress.css'
+import Vuelidate from 'vuelidate'
 
 Vue.config.productionTip = false
 
@@ -15,6 +16,8 @@ const token = localStorage.getItem('token')
 if (token) {
   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
 }
+
+Vue.use(Vuelidate)
 
 new Vue({
   router,

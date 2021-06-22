@@ -4,14 +4,16 @@
       <p>&#33;</p>
     </div>
     <div class="flash-text">
-      <p>This will be a flash message</p>
+      <p>{{ message }}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    
+  props: {
+    message: String
+  }
 }
 </script>
 

@@ -34,6 +34,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import Input from '../../components/forms/Input'
 // import { login } from '../../services/auth'
+import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   components: {
     Input
@@ -48,7 +49,8 @@ export default {
         username: '',
         password: '',
         passwordConfirm: ''
-      }
+      },
+      invalidForm: false
     }
   },
   mounted () {
@@ -60,18 +62,59 @@ export default {
     // console.log(this.getAuthTest)
   },
   methods: {
-    ...mapActions(['registerAction']),
+    ...mapActions(['registerAction', 'flashMessageAction']),
     // async authTest () {
     //   await this.authTestAction()
     // },
     async handleRegister () {
       console.log('You want to register user')
       // Collect login data and send request
-      const res = await this.registerAction(this.user)
-      if (await res) {
-        console.log('success')
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        this.invalidForm = true
+        console.log('Form is invalid')
+        if (!this.$v.user.username.minLength) {
+          this.flashMessageAction('Username must be at least 5 characters')
+        }
+        if (!this.$v.user.username.required) {
+          this.flashMessageAction('Username is required')
+        }
+        if (!this.$v.user.password.minLength) {
+          this.flashMessageAction('Password must be at least 5 characters')
+        }
+        if (!this.$v.user.password.required) {
+          this.flashMessageAction('Password is required')
+        }
+        // if (!this.$v.user.passwordConfirm.sameAs) {
+        //   this.flashMessageAction('Password does not match')
+        // }
+      } else {
+        const res = await this.registerAction(this.user)
+      if (res) {
+        console.log(res)
+        this.user.username = '',
+        this.user.password = ''
+        this.user.passwordConfirm = ''
       } else {
         console.log('error')
+      }
+      }
+    }
+  },
+  validations: {
+    user: {
+      username: {
+        required,
+        minLength: minLength(5)
+      },
+      password: {
+        required,
+        minLength: minLength(5)
+      },
+      passwordConfirm: {
+        required,
+        minLength: minLength(5)
+        // sameAs: sameAs(function(){this.user.password})
       }
     }
   }

@@ -5,16 +5,29 @@
       <SideBar />
       <router-view />
     </div>
+    <Flash v-if="getMessage" :message="getMessage" />
   </div>
 </template>
 
 <script>
 import TopBar from './components/navigation/TopBar'
 import SideBar from './components/navigation/SideBar'
+import NProgress from 'nprogress'
+import Flash from './components/flash-messages/Flash'
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     TopBar,
-    SideBar
+    SideBar,
+    Flash
+  },
+  computed: {
+    ...mapGetters(['getMessage'])
+  },
+  mounted () {
+    // Stop progress bar once app has mounted
+    NProgress.done()
   }
 }
 </script>
