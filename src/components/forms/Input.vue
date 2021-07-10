@@ -1,12 +1,13 @@
 <template>
   <div class="form-group">
+    <label v-if="addLabel">{{ labelContent }}</label>
     <input class="app-form-control" :type="inputType" :placeholder="placeholder" @input="$emit('input', $event.target.value)" />
   </div>
 </template>
 
 <script>
 export default {
-  props: ['inputType', 'placeholder']
+  props: ['inputType', 'placeholder', 'addLabel', 'labelContent']
 }
 </script>
 
